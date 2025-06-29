@@ -1,6 +1,6 @@
 # pfSense Setup
 
-This lab simulates a small business network environment using VirtualBox, pfSense, and multiple VLANs to isolate infrastructure, client, and server systems.
+This lab will go through the process of installing the pfSense firewall onto a machine and going through the setup for create the vlans and firewall rules for routing.
 
 ---
 
