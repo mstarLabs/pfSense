@@ -24,7 +24,7 @@ This project documents the installation and base configuration of pfSense to sim
 | Adapter 3 | LabNet_VLAN10   | Infrastructure (DC01) |
 | Adapter 4 | LabNet_VLAN20   | Sales Clients  |
 
-> **Note:** Each VLAN is mapped to a sparate VirtualBox Internal Network. VLAN tagging is not within VirtualBox.
+> **Note:** Each VLAN is mapped to a separate VirtualBox Internal Network. VLAN tagging is not within VirtualBox.
 
 ---
 
@@ -43,8 +43,8 @@ Ref 1: pfSense VM Configuration
  - Connect second VM to LabNet_Trunk interface to get a connection to pfSense
  - Navigate to `192.168.1.1` to access WebUI of pfSense
  - After login change default credentials for security
- - Navigate to `Interfaces>Assignments` and ensure all 4 interfaced are showing and connected `em0`, `em1`, `em2`, `em3`
- - Edit `em2` and `em3` changing thire name to simulate VLANs, enable interface, set IPv4 to static, set VLAN IP
+ - Navigate to `Interfaces>Assignments` and ensure all 4 interfaced are showing and connected `em0` = WAN, `em1` = Management (LabNet_Trunk), `em2` = VLAN10_INFRA (LabNet_VLAN10), `em3` = VLAN20_SALES (LabNet_VLAN20)
+ - Edit `em2` and `em3` changing their name to simulate VLANs, enable interface, set IPv4 to static, set VLAN IP
 > VLAN10_INFRA IP: 192.168.10.1/24, VLAN20_SALES IP: 192.168.20.1/24
 
 Ref 2: Interface
@@ -72,14 +72,14 @@ Ref 4: VLAN10_INFRA Rules
 Ref 5: VLAN20_SALES Rules
 ![VLAN20_Firewall_Rules](https://github.com/user-attachments/assets/7fe51df3-1cf0-47a2-868f-3efa058281cd)
 
-
-
+> VLAN30_HR and VLAN40_HR_FS01 rules will be craeted later as there is not enough network interfaced in VirtualBox to have all simulated VLANs at the same time. 
 ---
 
 ##  Skills Practiced
 
-- Documentation and Diagramming
-- Firewall Policy Planning
-- Logical Topology Design
-- Logical Network Mapping
-- Network Segmentation Design
+- Virtual Firewall Deployment (pfSense CE)
+- Multi-NIC Configureation in VirtualBox
+- DHCP and Static IP Addressing per Network Segment
+- Inter-VLAN Routing and Access Control
+- Firewall Rule Creation and Port Based Filtering
+- Documentation of Technical Configuration
