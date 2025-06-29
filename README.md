@@ -24,7 +24,7 @@ This project documents the installation and base configuration of pfSense to sim
 | Adapter 3 | LabNet_VLAN10   | Infrastructure (DC01) |
 | Adapter 4 | LabNet_VLAN20   | Sales Clients  |
 
-> **Note:** Each VLAN is mapped to a separate VirtualBox Internal Network. VLAN tagging is not within VirtualBox.
+> **Note:** Each VLAN is mapped to a separate VirtualBox Internal Network. VLAN tagging (802.1Q) is not supported in VirtualBox, so each virtual NIC represents a "VLAN" segment.
 
 ---
 
