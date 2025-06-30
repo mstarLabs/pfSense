@@ -37,6 +37,7 @@ This project documents the installation and base configuration of pfSense to sim
  - Configure 4 adapters to simulate VLAN configuration
 
 Ref 1: pfSense VM Configuration
+
 ![pfSense_VM_Configuration](https://github.com/user-attachments/assets/156e5807-00e6-44d6-a6dc-a0040d144a96)
 
 ### 2. Configure pfSense Interfaces
@@ -48,6 +49,7 @@ Ref 1: pfSense VM Configuration
 > VLAN10_INFRA IP: 192.168.10.1/24, VLAN20_SALES IP: 192.168.20.1/24
 
 Ref 2: Interface
+
 ![pfSense_Interfaces](https://github.com/user-attachments/assets/0bd3cb82-8197-439a-81f2-bb0ad15e4586)
 
  - Navigate to `Services>DHCP Server`, select the simulated VLAN interface
@@ -55,6 +57,7 @@ Ref 2: Interface
 > Do this for each VLAN changing the 3rd octect to the correct VLAN IP
 
 Ref 3: DHCP Settings
+
 ![pfSense_DHCP_Settings](https://github.com/user-attachments/assets/61a727a4-0ae7-417a-9459-c381c105d27b)
 
 ### 3. Configure Firewall Rules
@@ -64,12 +67,14 @@ Ref 3: DHCP Settings
  - Create rules for domain join ports; LDAP, Kerberos, SMB, NTP, DNS. 
 
 Ref 4: VLAN10_INFRA Rules
+
 ![VLAN10_Firewall_Rules](https://github.com/user-attachments/assets/9fee0708-fdea-4e20-b7f9-78a4211f25f0)
 
 - Create VLAN20_SALES rule for domain joining. Allowing Kerberos, LDAP, SMB, NTP, DNS.
 - Create Temporary allow all outbout rule for internet `Action: Pass, Interface: VLAN20_SALES Protocol: TCP/UPD, Source: VLAN20_SALES, Destination: Any, Port: Any, Description: Allow all outbound internet access`
 
 Ref 5: VLAN20_SALES Rules
+
 ![VLAN20_Firewall_Rules](https://github.com/user-attachments/assets/7fe51df3-1cf0-47a2-868f-3efa058281cd)
 
 > VLAN30_HR and VLAN40_HR_FS01 rules will be craeted later as there is not enough network interfaced in VirtualBox to have all simulated VLANs at the same time. 
