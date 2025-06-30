@@ -63,14 +63,13 @@ Ref 3: DHCP Settings
 ### 3. Configure Firewall Rules
  - Navigate to `Firewall>Rules` and select `VLAN10` to begin setting rules.
  - To allow the DC01 to access pfSense WebUI create rule `Action: Pass, Interface: 192.168.10.5 Protocol: TCP, Source: 192.168.10.5, Destination: 192.168.10.1, Port: 443, Description: Allow access to pfSense WebUI`
- - Temporarily add an allow all outbound rule for internet `Action: Pass, Interface: 192.168.10.5 Protocol: TCP/UPD, Source: 192.168.10.5, Destination: Any, Port: Any, Description: Allow all outbound internet access`
- - Create rules for domain join ports; LDAP, Kerberos, SMB, NTP, DNS. 
+ - Temporarily add an allow all outbound rule for internet `Action: Pass, Interface: 192.168.10.5 Protocol: TCP/UPD, Source: 192.168.10.5, Destination: Any, Port: Any, Description: Allow all outbound internet access` 
 
 Ref 4: VLAN10_INFRA Rules
 
 ![VLAN10_Firewall_Rules](https://github.com/user-attachments/assets/9fee0708-fdea-4e20-b7f9-78a4211f25f0)
 
-- Create VLAN20_SALES rule for domain joining. Allowing Kerberos, LDAP, SMB, NTP, DNS.
+- Navigate to `Firewall>Rules` and select `VLAN20` to begin setting rules.
 - Create Temporary allow all outbout rule for internet `Action: Pass, Interface: VLAN20_SALES Protocol: TCP/UPD, Source: VLAN20_SALES, Destination: Any, Port: Any, Description: Allow all outbound internet access`
 
 Ref 5: VLAN20_SALES Rules
@@ -78,6 +77,33 @@ Ref 5: VLAN20_SALES Rules
 ![VLAN20_Firewall_Rules](https://github.com/user-attachments/assets/7fe51df3-1cf0-47a2-868f-3efa058281cd)
 
 > VLAN30_HR and VLAN40_HR_FS01 rules will be craeted later as there is not enough network interfaced in VirtualBox to have all simulated VLANs at the same time. 
+
+---
+
+## 🔗 ADDS Integration (Domain Controller in VLAN10_INFRA)
+
+This pfSense configuration was updated to support Active Directory Domain Services (ADDS) across VLANs, enabling domain joining, DNS resolution, and secure communication between VLAN segments.
+
+### Rule Adjustments Made for ADDS:
+- **VLAN20_SALES → DC01 (192.168.10.5)**:
+  - DNS (port 53)
+  - LDAP (389), Kerberos (88)
+  - RPC Endpoint Mapper (135), SMB (445), NetBIOS (139)
+  - Dynamic RPC ports (49152–65535)
+  - Optional: NetBIOS Name Service (137) and Datagram Service (138)
+- **VLAN10_INFRA → Any (port 53)**:
+  - Allowed DNS responses from DC01 back to Sales clients
+
+These rules were scoped tightly to the domain controller (192.168.10.5) to avoid overly permissive access.
+
+Updated Rules:
+ - VLAN10_INFRA Rules  
+  ![New_VLAN10_Firewall_Rules](https://github.com/user-attachments/assets/8f9879dc-048a-4791-bfab-9339744369a7)
+ - VLAN20_SALES Rules  
+   ![New_VLAN20_Firewall_Rules](https://github.com/user-attachments/assets/1b6c13ee-7205-4ef0-b400-79aab08a8984)
+
+For full context, see the <a href="https://github.com/mstarLabs/ADDS-Setup">Active Directory Lab Setup Documentation</a>
+
 ---
 
 ##  Skills Practiced
