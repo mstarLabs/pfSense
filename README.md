@@ -62,19 +62,21 @@ Ref 3: DHCP Settings
 
 ### 3. Configure Firewall Rules
  - Navigate to `Firewall>Rules` and select `VLAN10` to begin setting rules.
- - To allow the DC01 to access pfSense WebUI create rule `Action: Pass, Interface: 192.168.10.5 Protocol: TCP, Source: 192.168.10.5, Destination: 192.168.10.1, Port: 443, Description: Allow access to pfSense WebUI`
- - Temporarily add an allow all outbound rule for internet `Action: Pass, Interface: 192.168.10.5 Protocol: TCP/UPD, Source: 192.168.10.5, Destination: Any, Port: Any, Description: Allow all outbound internet access` 
+ - Allow ping to any `Action: Pass, Interface: VLAN10_INFRA Protocol: ICMP, Source: 192.168.10.5, Destination: Any, Port: Any, Description: Allow ICMP for ping and diagnostics`
+ - To allow the DC01 to access pfSense WebUI create rule `Action: Pass, Interface: VLAN10_INFRA Protocol: TCP, Source: 192.168.10.5, Destination: 192.168.10.1, Port: 443, Description: Allow access to pfSense WebUI`
+ - Temporarily add an allow all outbound rule for internet `Action: Pass, Interface: VLAN10_INFRA Protocol: Any, Source: 192.168.10.5, Destination: Any, Port: Any, Description: Allow all outbound internet access` 
 
 Ref 4: VLAN10_INFRA Rules
 
-![VLAN10_Firewall_Rules](https://github.com/user-attachments/assets/9fee0708-fdea-4e20-b7f9-78a4211f25f0)
+![VLAN10_Firewall_Rules](https://github.com/user-attachments/assets/a86c9690-ddf3-40d9-96f5-1a8d105faff5)
 
 - Navigate to `Firewall>Rules` and select `VLAN20` to begin setting rules.
-- Create Temporary allow all outbout rule for internet `Action: Pass, Interface: VLAN20_SALES Protocol: TCP/UPD, Source: VLAN20_SALES, Destination: Any, Port: Any, Description: Allow all outbound internet access`
+- Allow ping to any `Action: Pass, Interface: VLAN20_SALES Protocol: ICMP, Source: VLAN20_SALES, Destination: Any, Port: Any, Description: Allow ICMP for ping and diagnostics`
+- Create Temporary allow all outbout rule for internet `Action: Pass, Interface: VLAN20_SALES Protocol: Any, Source: VLAN20_SALES, Destination: Any, Port: Any, Description: Allow all outbound internet access`
 
 Ref 5: VLAN20_SALES Rules
 
-![VLAN20_Firewall_Rules](https://github.com/user-attachments/assets/7fe51df3-1cf0-47a2-868f-3efa058281cd)
+![VLAN20_Firewall_Rules](https://github.com/user-attachments/assets/c1083c24-8587-401b-89a8-4aacd9dc99cc)
 
 > VLAN30_HR and VLAN40_HR_FS01 rules will be craeted later as there is not enough network interfaced in VirtualBox to have all simulated VLANs at the same time. 
 
